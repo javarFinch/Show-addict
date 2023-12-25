@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+/* body {
+    background-image: url("https://m.media-amazon.com/images/G/01/AdProductsWebsite/images/AUX/firetv_sponsoredtile_backgroundmulti_do._TTW_.jpg");
+} */
+
+.login {
+    background-image: url("https://m.media-amazon.com/images/G/01/AdProductsWebsite/images/AUX/firetv_sponsoredtile_backgroundmulti_do._TTW_.jpg");
+}
+

@@ -1,0 +1,19 @@
+body {
+    background-image: url("https://m.media-amazon.com/images/G/01/AdProductsWebsite/images/AUX/firetv_sponsoredtile_backgroundmulti_do._TTW_.jpg");
+}
+:host {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
+}
+div {
+    /* background-color: ; */
+    height: 100vh;
+    margin: auto;
+    text-align: center;
+    padding: 50% 0%;
+    color:aquamarine;
+    /* background-image: url("https://m.media-amazon.com/images/G/01/AdProductsWebsite/images/AUX/firetv_sponsoredtile_backgroundmulti_do._TTW_.jpg"); */
+}
+
