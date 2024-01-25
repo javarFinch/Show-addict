@@ -1,3 +1,15 @@
+<h1>Welcome to: Show-Addict</h1>
 <div class="background">
-<p>login works!</p>
+    <div>
+        <span class="p-float-label"> Username:
+        <input pInputText type="text" [(ngModel)]="usernameFormElement" id="username">
+        <label for="username">Username</label>
+        </span>
+        <br>
+        <span id="password">Password:</span>
+        <p-password [(ngModel)]="passwordFormElement" [feedback]="false" [toggleMask]="true" placeholder="Enter your Password"></p-password>
+        <!-- <input type="password" [(ngModel)]="passwordFormElement"> -->
+        <p-button label="Sign In" (click)="signIn()"></p-button>
+        <a href="http://localhost:4200/signup">New? Create an Account</a>
+    </div>
 </div>

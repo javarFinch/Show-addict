@@ -1,0 +1,52 @@
+.p-password-input{
+    display: inline-block;
+    width: 65vw;
+}
+
+#newId{
+    display: inline-block;
+    width: 65vw; 
+}
+#passwordconflabel{
+    margin-top: 49vh;
+    left: 20%;
+}
+#passwordconf{
+    position: relative;
+    top: 50vh;
+    left: 18vw;
+}
+#password1{
+    position: relative;
+    top: 46vh;
+    left: 18vw;
+}
+#password1label{
+    margin-top: 45vh;
+    left: 20%;
+}
+#username{
+    position: relative;
+    top: 42vh;
+    left: 18vw;
+    width: 65vw;
+}
+#usernamelabel{
+    margin-top: 41vh;
+    left: 20%;
+}
+#createAccountButton{
+    position: absolute;
+    top: 67vh;
+    right: 12%;
+}
+#clearFormButton{
+    position: absolute;
+    top: 67vh;
+    left: 8%;
+} 
+h1{
+    position: absolute;
+    top: 2vh;
+    left: 41vw;
+}

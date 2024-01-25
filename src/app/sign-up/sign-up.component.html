@@ -1,0 +1,19 @@
+<h1>Create New Account</h1>
+<div>
+    <form >
+    <span class="p-float-label">
+        <input pInputText type="text" [(ngModel)]="usernameFormElement" id="username" name="username" placeholder="Enter your desired Username">
+        <label id="usernamelabel" for="username">Username</label>
+    </span>
+    <span class="p-float-label">
+        <p-password   [feedback]="false" [(ngModel)]="password1" [inputStyle]="{'width':'65vw'}" name="password1" [toggleMask]="true" id="password1" placeholder="Please enter your desired password"></p-password>
+        <label id="password1label" for="password1">Password</label>
+    </span>
+    <span class="p-float-label">
+        <p-password  [feedback]="false"  [inputId]="newId" [inputStyle]="{'width':'65vw'}" [(ngModel)]="passwordconf" name="passwordconf" [toggleMask]="true" id="passwordconf" placeholder="Please re-enter your desired password"></p-password>
+        <label id="passwordconflabel" for="passwordconf">Password</label>
+    </span>
+    <p-button id="createAccountButton" label="Create Account" (click)="createAccount()"></p-button>
+    <p-button id="clearFormButton" label="Clear form" (click)="clear()"></p-button>
+    </form>
+</div>
