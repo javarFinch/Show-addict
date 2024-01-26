@@ -2,17 +2,36 @@
 <div>
     <form >
     <span class="p-float-label">
-        <input pInputText type="text" [(ngModel)]="usernameFormElement" id="username" name="username" placeholder="Enter your desired Username">
+        <input pInputText (focusout)="validateUsername()" type="text" [(ngModel)]="usernameFormElement" id="username" name="username" placeholder="Enter your desired Username">
         <label id="usernamelabel" for="username">Username</label>
     </span>
+    @if(usernameinvalid) {
+        <span id="usernameinvalid">{{usernameFormElement}} is not available </span>
+    }
+    @else if(usernamevalid) {
+        <span id="usernamevalid">{{usernameFormElement}} is available </span>
+    }
     <span class="p-float-label">
-        <p-password   [feedback]="false" [(ngModel)]="password1" [inputStyle]="{'width':'65vw'}" name="password1" [toggleMask]="true" id="password1" placeholder="Please enter your desired password"></p-password>
+        <p-password (focusout)="validatePassword()"  [feedback]="false" [(ngModel)]="password1" [inputStyle]="{'width':'65vw'}" name="password1" [toggleMask]="true" id="password1" placeholder="Please enter your desired password"></p-password>
         <label id="password1label" for="password1">Password</label>
     </span>
+    @if(passwordInvalid) {
+         <div id="passwordinvalid">
+            Please create a password that follows the guidelines below
+            <ul>
+                <li>At least One Uppercase letter</li>
+                <li>At lease one lowercase letter</li>
+                <li>At least one of the following special characters:!,&#64;,#, or $</li>
+            </ul>
+            </div> 
+    }
     <span class="p-float-label">
-        <p-password  [feedback]="false"  [inputId]="newId" [inputStyle]="{'width':'65vw'}" [(ngModel)]="passwordconf" name="passwordconf" [toggleMask]="true" id="passwordconf" placeholder="Please re-enter your desired password"></p-password>
+        <p-password  (focusout)="validatePasswordConf()" [feedback]="false"  [inputId]="newId" [inputStyle]="{'width':'65vw'}" [(ngModel)]="passwordconf" name="passwordconf" [toggleMask]="true" id="passwordconf" placeholder="Please re-enter your desired password"></p-password>
         <label id="passwordconflabel" for="passwordconf">Password</label>
     </span>
+    @if(passwordsdontmatch) {
+        <span id="passwordsdontmatch">The passwords do not match.</span>
+    }
     <p-button id="createAccountButton" label="Create Account" (click)="createAccount()"></p-button>
     <p-button id="clearFormButton" label="Clear form" (click)="clear()"></p-button>
     </form>

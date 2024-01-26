@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PasswordModule,
     InputTextModule,
     ButtonModule,
-    DividerModule
+    DividerModule,
+    HttpClientModule,
 
   ],
   providers:[BrowserAnimationsModule],
@@ -31,6 +33,14 @@ export class SignUpComponent {
   strongStrength:string="/[!@#$]{1}[A-Za-z0-9]{1,}/"
   // strongStrength:string="/[A-Za-z0-9!@#$]{8,10}/"
   mediumStrength:string="/[A-Z0-9a-z!@#$]{4,7}/"
+  usernameinvalid:boolean = false;
+  usernamevalid:boolean= false;
+  validUsernameUrl:string='/validUsername'
+  passwordInvalid:boolean=false;
+  passwordsdontmatch:boolean = false;
+  constructor(private http:HttpClient) {
+    
+  }
   ngOnInit() {
     document.body.className="sign-up";
   }
@@ -47,6 +57,30 @@ export class SignUpComponent {
     this.usernameFormElement ='';
     this.password1='';
     this.passwordconf=''
+  }
+  validateUsername():void {
+    this.http.get<boolean>(this.validUsernameUrl).subscribe(result => {this.usernamevalid= result;
+      this.usernameinvalid = !result;
+    });
+  }
+  validatePassword():void {
+    const resp = this.password1.match("[A-Z]")
+    console.log(`What match is resturning is: ${resp}`);
+    
+    if (this.password1.match("[A-Z]{1,}") && this.password1.match("[0-9]{1,}") && this.password1.match("[!@#$]{1,}")) {
+      this.passwordInvalid = false;
+      
+    } else {
+      this.passwordInvalid = true;
+    }
+  }
+  validatePasswordConf():void {
+    if (this.password1 === this.passwordconf) {
+    this.passwordsdontmatch=false;
+    } else {
+      this.passwordsdontmatch = true;
+    }
+
   }
 
 }

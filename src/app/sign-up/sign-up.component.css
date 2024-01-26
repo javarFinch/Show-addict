@@ -8,45 +8,68 @@
     width: 65vw; 
 }
 #passwordconflabel{
-    margin-top: 49vh;
+    margin-top: 44vh;
     left: 20%;
 }
 #passwordconf{
     position: relative;
-    top: 50vh;
+    top: 45vh;
     left: 18vw;
 }
 #password1{
     position: relative;
-    top: 46vh;
+    top: 41vh;
     left: 18vw;
 }
 #password1label{
-    margin-top: 45vh;
+    margin-top: 40vh;
     left: 20%;
 }
 #username{
     position: relative;
-    top: 42vh;
+    top: 36vh;
     left: 18vw;
     width: 65vw;
 }
 #usernamelabel{
-    margin-top: 41vh;
+    margin-top: 35vh;
     left: 20%;
 }
 #createAccountButton{
     position: absolute;
-    top: 67vh;
-    right: 12%;
+    bottom: 0;
+    right: 0;
 }
 #clearFormButton{
     position: absolute;
-    top: 67vh;
-    left: 8%;
+    bottom: 0;
+    left: 0;
 } 
 h1{
-    position: absolute;
+    position: relative;
     top: 2vh;
     left: 41vw;
+}
+#usernamevalid,#usernameinvalid{
+    position: relative;
+    left: 21%;
+    top: 37vh;
+}
+#usernamevalid {
+    color: #31ff00;
+}
+#usernameinvalid{
+    color: red;
+}
+#passwordinvalid{
+    position: relative;
+    top: 44vh;
+    left: 19%;
+    color: red;
+}
+#passwordsdontmatch{
+    position: relative;
+    top: 45vh;
+    left: 19vw;
+    color: red;
 }
