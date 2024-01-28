@@ -32,7 +32,7 @@
     @if(passwordsdontmatch) {
         <span id="passwordsdontmatch">The passwords do not match.</span>
     }
-    <p-button id="createAccountButton" label="Create Account" (click)="createAccount()"></p-button>
+    <p-button [loading]="loading" [disabled]="disableCreateAccount" id="createAccountButton" label="Create Account" (click)="createAccount()"></p-button>
     <p-button id="clearFormButton" label="Clear form" (click)="clear()"></p-button>
     </form>
 </div>

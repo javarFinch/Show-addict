@@ -6,6 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -38,7 +39,11 @@ export class SignUpComponent {
   validUsernameUrl:string='http://localhost:8080/users/validUsername?username='
   passwordInvalid:boolean=false;
   passwordsdontmatch:boolean = false;
-  constructor(private http:HttpClient) {
+  disableCreateAccount:boolean = true;
+  loading:boolean= false;
+  newUserUrl:string = "http://localhost:8080/users/createNewUser";
+  constructor(private http:HttpClient,
+    private router:Router) {
     
   }
   ngOnInit() {
@@ -50,10 +55,23 @@ export class SignUpComponent {
   }
 
   createAccount():void {
-    console.log(`Username:${this.usernameFormElement},password:${this.password1},${this.passwordconf}`);
+    this.loading = true;
+    this.http.post(this.newUserUrl,{"username":this.usernameFormElement,
+    "password":this.password1
+  }).subscribe(res => {
+    console.log(res);
+    
+    if(res != null) {
+      alert(`Successfully created new account for user: ${this.usernameFormElement}. 
+      please hit Ok and sign in again with your new credentials`);
+      this.loading = false;
+      this.router.navigateByUrl("/login")
+    }
+  })
 
   }
   clear():void {
+    this.loading = true;
     this.usernameFormElement ='';
     this.password1='';
     this.passwordconf=''
@@ -61,6 +79,7 @@ export class SignUpComponent {
     this.usernamevalid = false;
     this.passwordsdontmatch = false;
     this.passwordInvalid = false;
+    this.disableCreateAccount = true;
   }
   validateUsername():void {
     this.http.get<boolean>(this.validUsernameUrl+this.usernameFormElement).subscribe(result => {
@@ -73,17 +92,20 @@ export class SignUpComponent {
       this.usernameinvalid = !result;
       }
     });
+    this.checkCreateAccountButton();
   }
   validatePassword():void {
     const resp = this.password1.match("[A-Z]")
     console.log(`What match is resturning is: ${resp}`);
     
-    if ((this.password1.match("[A-Z]{1,}") && this.password1.match("[0-9]{1,}") && this.password1.match("[!@#$]{1,}")) || this.password1 === '') {
+    if ((this.password1.match("[A-Z]{1,}") && this.password1.match("[0-9]{1,}") && 
+    this.password1.match("[a-z]{1,}") && this.password1.match("[!@#$]{1,}")) || this.password1 === '') {
       this.passwordInvalid = false;
       
     } else {
       this.passwordInvalid = true;
     }
+    this.checkCreateAccountButton();
   }
   validatePasswordConf():void {
     if (this.password1 === this.passwordconf) {
@@ -91,7 +113,17 @@ export class SignUpComponent {
     } else {
       this.passwordsdontmatch = true;
     }
-
+    this.checkCreateAccountButton();
   }
+  checkCreateAccountButton():void {
+    if (!this.passwordsdontmatch && !this.passwordInvalid && this.usernamevalid 
+      && this.password1 !== '' && this.passwordconf !== '') {
+      this.disableCreateAccount = false;
+    } else {
+      this.disableCreateAccount = true;
+    }
+  }
+
+
 
 }
