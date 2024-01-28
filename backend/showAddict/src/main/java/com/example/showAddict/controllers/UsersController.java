@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:4200",methods = {RequestMethod.GET,RequestMethod.POST})
 public class UsersController {
   @Autowired
   private UsersService service;
   @Autowired
   private UsersRepository repository;
+
+
   @GetMapping(path = "/validUsername")
   public ResponseEntity<Boolean> isUsernameAvailable(@RequestParam String username) {
     username = username.toLowerCase();
@@ -21,7 +25,8 @@ public class UsersController {
     System.out.println(r);
     return ResponseEntity.ok(r == null);
   }
-} @PostMapping(path = "/createNewUser")
+
+ @PostMapping(path = "/createNewUser")
   public ResponseEntity<Users> addNewUser(@RequestBody Users newUser) {
   repository.save(newUser);
     return ResponseEntity.ok(newUser);
