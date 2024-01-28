@@ -4,6 +4,7 @@ import com.example.showAddict.models.Users;
 import com.example.showAddict.repositories.UsersRepository;
 import com.example.showAddict.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class UsersController {
     return ResponseEntity.ok(r == null);
   }
 
- @PostMapping(path = "/createNewUser")
+ @PostMapping(path = "/createNewUser", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Users> addNewUser(@RequestBody Users newUser) {
   repository.save(newUser);
     return ResponseEntity.ok(newUser);

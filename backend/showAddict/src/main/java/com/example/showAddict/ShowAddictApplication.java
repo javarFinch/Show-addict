@@ -1,5 +1,6 @@
 package com.example.showAddict;
 
+import com.example.showAddict.models.Users;
 import com.example.showAddict.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -21,8 +22,6 @@ public class ShowAddictApplication {
 //    SpringApplication.run(ShowAddictApplication.class, args);
     ConfigurableApplicationContext appContext =SpringApplication.run(ShowAddictApplication.class, args);
 		UsersRepository repo = appContext.getBean(UsersRepository.class);
-    System.out.println("We should be seeing exactly 1 User from the Users table!!!!!!");
-    System.out.println(repo.findAll());
 //		ShowAddictApplication sa = new ShowAddictApplication();
 //		sa.seeThis();
 	}
