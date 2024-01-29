@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import {ButtonModule } from 'primeng/button';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -20,6 +21,11 @@ import {ButtonModule } from 'primeng/button';
 export class LoginComponent {
   usernameFormElement:string = ""
   passwordFormElement:string=""
+  loading:boolean=false;
+  loginUrl:string="http://localhost:8080/users/login"
+  constructor(private http:HttpClient) {
+
+  }
   ngOnInit() {
     document.body.className="login";
   }
@@ -29,7 +35,7 @@ export class LoginComponent {
   }
 
   signIn() {
-    console.log('Sign In clicked');
+    this.http.get(this.loginUrl)
   }
 
 }

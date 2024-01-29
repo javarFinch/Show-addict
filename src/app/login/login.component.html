@@ -1,4 +1,5 @@
 <h1>Welcome to: Show-Addict</h1>
+<p>Where We help you find your next TV show addiction!!</p>
 <div class="background">
     <div>
         <span class="p-float-label"> Username:
@@ -9,7 +10,7 @@
         <span id="password">Password:</span>
         <p-password [(ngModel)]="passwordFormElement" [feedback]="false" [toggleMask]="true" placeholder="Enter your Password"></p-password>
         <!-- <input type="password" [(ngModel)]="passwordFormElement"> -->
-        <p-button label="Sign In" (click)="signIn()"></p-button>
-        <a href="http://localhost:4200/signup">New? Create an Account</a>
+        <p-button [loading]="loading" label="Sign In" (click)="signIn()"></p-button>
+        <a href="http://localhost:4200/signup">New Here? Create an Account</a>
     </div>
 </div>
