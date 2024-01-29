@@ -27,6 +27,13 @@ public class UsersController {
     return ResponseEntity.ok(r == null);
   }
 
+  @GetMapping(path = "/login")
+  public ResponseEntity<Users> loginUser(@RequestBody Users user) {
+    user= repository.findUserForLogin(user.getUsername(),user.getPassword());
+    System.out.println(user);
+    return ResponseEntity.ok(user);
+  }
+
  @PostMapping(path = "/createNewUser", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Users> addNewUser(@RequestBody Users newUser) {
   repository.save(newUser);
