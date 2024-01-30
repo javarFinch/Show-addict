@@ -1,4 +1,6 @@
-<p>home works!</p>
+@if(showUser) {
+<h1>Hi {{user.username | uppercase}}</h1>
+}
 <p-carousel [value]="strings" [numVisible]="1" [numScroll]="1" [circular]="true">
     <ng-template let-string pTemplate="item">
         <h1>{{string}}</h1>

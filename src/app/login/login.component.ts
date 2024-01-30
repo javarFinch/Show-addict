@@ -3,7 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import {ButtonModule } from 'primeng/button';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { Users } from '../Users';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -11,9 +13,11 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [
     FormsModule,
+    RouterModule,
     PasswordModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    HttpClientModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -22,9 +26,10 @@ export class LoginComponent {
   usernameFormElement:string = ""
   passwordFormElement:string=""
   loading:boolean=false;
-  loginUrl:string="http://localhost:8080/users/login"
-  constructor(private http:HttpClient) {
+  loginUrl:string="http://localhost:8080/users/login";
+  loggedInUser:Users | undefined;
 
+  constructor(private http:HttpClient) {
   }
   ngOnInit() {
     document.body.className="login";
@@ -35,7 +40,16 @@ export class LoginComponent {
   }
 
   signIn() {
-    this.http.get(this.loginUrl)
+    this.loading = true;
+    this.http.get<Users>(this.loginUrl,{headers: new HttpHeaders({"username":this.usernameFormElement,"password":this.passwordFormElement})}).subscribe(resp =>{
+      console.log(`returned from server with User ${resp}`);
+      if (resp) {
+        this.loggedInUser = resp;
+        console.log(`User is now ${this.loggedInUser.username}`);
+        this.loading = false;
+
+      }
+    })
   }
 
 }
