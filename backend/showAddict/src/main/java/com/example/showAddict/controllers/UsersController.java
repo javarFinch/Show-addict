@@ -19,6 +19,7 @@ public class UsersController {
   private UsersRepository repository;
 
 
+
   @GetMapping(path = "/validUsername")
   public ResponseEntity<Boolean> isUsernameAvailable(@RequestParam String username) {
     username = username.toLowerCase();
@@ -26,10 +27,16 @@ public class UsersController {
     System.out.println(r);
     return ResponseEntity.ok(r == null);
   }
-
+  @GetMapping(path = "/findUser")
+  public ResponseEntity<Users> getUserByUsername(@RequestHeader(required = true,name = "username") String username) {
+    username = username.toLowerCase();
+    Users r = repository.findByUsername(username);
+    System.out.println(r);
+    return ResponseEntity.ok(r);
+  }
   @GetMapping(path = "/login")
-  public ResponseEntity<Users> loginUser(@RequestBody Users user) {
-    user= repository.findUserForLogin(user.getUsername(),user.getPassword());
+  public ResponseEntity<Users> loginUser(@RequestHeader(required = true,name = "username") String username, @RequestHeader(required = true,name = "password") String password) {
+    Users user= repository.findUserForLogin(username,password);
     System.out.println(user);
     return ResponseEntity.ok(user);
   }
