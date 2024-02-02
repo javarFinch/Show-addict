@@ -10,7 +10,9 @@
         <span id="password">Password:</span>
         <p-password [(ngModel)]="passwordFormElement" [feedback]="false" [toggleMask]="true" placeholder="Enter your Password"></p-password>
         <!-- <input type="password" [(ngModel)]="passwordFormElement"> -->
-        <p-button [loading]="loading" routerLink="/dashboard/home"[queryParams]="{user:usernameFormElement}" label="Sign In" (click)="signIn()"></p-button>
+        <p-button [loading]="loading"  label="Sign In" (click)="signIn()"></p-button>
         <a href="http://localhost:4200/signup">New Here? Create an Account</a>
     </div>
 </div>
+
+<!-- routerLink="/dashboard/home"[queryParams]="{user:usernameFormElement}"-->

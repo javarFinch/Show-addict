@@ -5,7 +5,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import {ButtonModule } from 'primeng/button';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Users } from '../Users';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { UserServiceService } from '../user-service.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     PasswordModule,
     InputTextModule,
     ButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -27,9 +29,12 @@ export class LoginComponent {
   passwordFormElement:string=""
   loading:boolean=false;
   loginUrl:string="http://localhost:8080/users/login";
-  loggedInUser:Users | undefined;
+  loggedInUser:Users | null = null;
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,
+              private userService:UserServiceService,
+              private router:Router
+              ) {
   }
   ngOnInit() {
     document.body.className="login";
@@ -41,13 +46,24 @@ export class LoginComponent {
 
   signIn() {
     this.loading = true;
+    
+    
     this.http.get<Users>(this.loginUrl,{headers: new HttpHeaders({"username":this.usernameFormElement,"password":this.passwordFormElement})}).subscribe(resp =>{
       console.log(`returned from server with User ${resp}`);
       if (resp) {
         this.loggedInUser = resp;
+        this.loggedInUser.authenticated=true;
+        //send logged user to service somehow
+        this.userService.setLoggedUser(this.loggedInUser);
         console.log(`User is now ${this.loggedInUser.username}`);
         this.loading = false;
+        this.router.navigateByUrl(`/dashboard/home?user=${this.usernameFormElement}`);
 
+      } else {
+        //set boolean variable for wrong password or username message
+        this.loading=false;
+        this.usernameFormElement='';
+        this.passwordFormElement=''
       }
     })
   }
